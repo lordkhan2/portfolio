@@ -50,6 +50,21 @@ const Navbar = () => {
         },
         opened: {
             x: 0,
+            transition: {
+                when: "beforeChildren",
+                staggerChildren: 0.2,
+            },
+        },
+    };
+
+    const listItemVariants = {
+        closed: {
+            x: -10,
+            opacity: 0,
+        },
+        opened: {
+            x: 0,
+            opacity: 1,
         },
     };
 
@@ -69,20 +84,12 @@ const Navbar = () => {
             </div>
             {/* Social */}
             <div className="hidden md:flex gap-4 ">
-                <Link href="/">
-                    <Image src="/github.png" width={24} height={24} />
+                <Link href="https://github.com/lordkhan2">
+                    <Image src="/github.png" alt="github" width={24} height={24} />
                 </Link>
-                <Link href="/">
-                    <Image src="/pinterest.png" width={24} height={24} />
-                </Link>
-                <Link href="/">
-                    <Image src="/instagram.png" width={24} height={24} />
-                </Link>
-                <Link href="/">
-                    <Image src="/facebook.png" width={24} height={24} />
-                </Link>
-                <Link href="/">
-                    <Image src="/linkedin.png" width={24} height={24} />
+
+                <Link href="https://www.linkedin.com/in/mohammed-farhan-khan/">
+                    <Image src="/linkedin.png" alt="linkedin" width={24} height={24} />
                 </Link>
             </div>
             {/* responsive menu */}
@@ -96,11 +103,11 @@ const Navbar = () => {
                 {/* Menu List */}
                 {open && (
                     <motion.div variants={listVariants} initial="closed" animate="opened" className="absolute top-0 left-0 w-screen h-screen bg-black text-white flex flex-col justify-center items-center gap-8 text-4xl z-40">
-                        <motion.div className="" key={link.title}>
-                            {links.map((link) => (
+                        {links.map((link) => (
+                            <motion.div variants={listItemVariants} className="" key={link.title}>
                                 <Link href={link.url}>{link.title}</Link>
-                            ))}
-                        </motion.div>
+                            </motion.div>
+                        ))}
                     </motion.div>
                 )}
             </div>
